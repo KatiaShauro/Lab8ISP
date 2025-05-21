@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SHAURO_353502.UI.Pages.EditServicePage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:converters="clr-namespace:SHAURO_353502.UI.ValueConverter"
+             Title="Edit service">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:DateValidatorColorConverter x:Key="DateValidatorColorConverter"/>
+            <converters:CostValidatorColorConverter x:Key="CostValidatorColorConverter"/>
+
+            <Style x:Key="ValidatedNumericEntryStyle" TargetType="Entry">
+                <Setter Property="Keyboard" Value="Numeric" />
+                <Setter Property="Placeholder" Value="0.00"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout
+        Margin="7">
+        <Label 
+            Text="Enter service name:" />
+        <Entry
+            x:Name="NameEntry"
+            Placeholder="New service"
+            Text="{Binding Name, Mode=TwoWay}"/>
+        <Label
+            Text="Entry service cost:"/>
+        <Entry 
+            x:Name="CostEntry"
+            Text="{Binding Price, Mode=TwoWay}"
+            BackgroundColor="{Binding Price, Converter={StaticResource CostValidatorColorConverter}}"
+            Style="{StaticResource ValidatedNumericEntryStyle}">
+        </Entry>
+        <Label
+            Text="Entry service duration:"/>
+        <Entry 
+            x:Name="DurationEntry"
+            Text="{Binding Dur, Mode=TwoWay}"
+            BackgroundColor="{Binding Dur, Converter={StaticResource CostValidatorColorConverter}}"
+            Style="{StaticResource ValidatedNumericEntryStyle}"/>
+        <Label 
+            Text="Enter schedule name:" />
+        <Entry
+            x:Name="ScheduleNameEntry"
+            Placeholder="New schedule name"
+            Text="{Binding Schedule, Mode=TwoWay}"/>
+        <HorizontalStackLayout>
+            <VerticalStackLayout>
+                <Label
+                    Text="Entry begining:"/>
+                <Entry 
+                    x:Name="BeginingEntry"
+                    Text="{Binding Begining, Mode=TwoWay}"
+                    BackgroundColor="{Binding Begining, Converter={StaticResource DateValidatorColorConverter}}"
+                    Style="{StaticResource ValidatedNumericEntryStyle}"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label
+                    Text="Entry ending:"/>
+                <Entry 
+                    x:Name="EndingEntry"
+                    Text="{Binding Ending, Mode=TwoWay}"
+                    BackgroundColor="{Binding Ending, Converter={StaticResource DateValidatorColorConverter}}"
+                    Style="{StaticResource ValidatedNumericEntryStyle}"/>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+        <Button
+            Text="Edit"
+            Command="{Binding EditServiceCommand}"
+        />
+    </VerticalStackLayout>
+</ContentPage>
